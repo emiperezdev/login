@@ -1,6 +1,13 @@
 import { User } from "@prisma/client";
 import Joi from "joi";
 
+interface UserData {
+  id: number;
+  name: string;
+  email: string;
+  age: number;
+}
+
 const validateUser = (user: User) => {
   const schema = Joi.object({
     name: Joi.string().min(1).max(50).required(),
@@ -12,4 +19,4 @@ const validateUser = (user: User) => {
   return schema.validate(user);
 }
 
-export { validateUser };
+export { validateUser, UserData };

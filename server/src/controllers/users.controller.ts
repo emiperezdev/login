@@ -1,6 +1,8 @@
 import { PrismaClient, User } from "@prisma/client";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import { UserData } from "../schemas/user.schema";
+import getAccessToken from "../libs/getAccessToken";
 
 const db = new PrismaClient();
 
@@ -24,14 +26,16 @@ export const postUser = async (req: Request, res: Response) => {
     },
   });
 
-  const userData = {
+  const userData: UserData = {
     id: newUser.id,
     name: newUser.name,
     email: newUser.email,
-    age: newUser.age,
-    createdAt: newUser.createdAt
-  }
+    age: newUser.age
+  };
 
+  const token = getAccessToken(userData);
+
+  res.cookie('token', token);
   res.status(201).json(userData);
 };
 

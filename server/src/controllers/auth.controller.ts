@@ -26,6 +26,18 @@ export const handleLogin = async (req: Request, res: Response) => {
     age: foundUser.age,
   };
 
-  res.cookie('token', getAccessToken(userData));
+  res.cookie("token", getAccessToken(userData));
   res.json(userData);
 };
+
+export const handleLogout = async (req: Request, res: Response) => {
+  res.cookie("token", "", {
+    expires: new Date(0),
+  });
+
+  res.sendStatus(200);
+};
+
+export const handleVerify = (req: Request, res: Response) => {
+  res.json('verify');
+}

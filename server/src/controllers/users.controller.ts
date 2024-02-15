@@ -6,12 +6,18 @@ import getAccessToken from "../libs/getAccessToken";
 
 const db = new PrismaClient();
 
-export const getUsers = async (req: Request, res: Response) => {
-  
-};
+export const getUsers = async (req: Request, res: Response) => {};
 
 export const postUser = async (req: Request, res: Response) => {
   const { name, email, password, age } = req.body as User;
+
+  const foundUser = await db.user.findFirst({
+    where: {
+      email: email,
+    },
+  });
+
+  if (foundUser) return res.status(404).json("Email is already in use");
 
   const salt = await bcrypt.genSalt(10);
   const encryptedPassword = await bcrypt.hash(password, salt);
@@ -22,7 +28,7 @@ export const postUser = async (req: Request, res: Response) => {
       email: email,
       password: encryptedPassword,
       age: age,
-      createdAt: new Date()
+      createdAt: new Date(),
     },
   });
 
@@ -30,12 +36,12 @@ export const postUser = async (req: Request, res: Response) => {
     id: newUser.id,
     name: newUser.name,
     email: newUser.email,
-    age: newUser.age
+    age: newUser.age,
   };
 
   const token = getAccessToken(userData);
 
-  res.cookie('token', token);
+  res.cookie("token", token);
   res.status(201).json(userData);
 };
 

@@ -1,27 +1,43 @@
 import { Link } from "react-router-dom";
+import InputField from "./InputField";
+import { InputEmail, InputPassword } from "../entities/InputDto";
+import Title from "./Title";
+import SubmitButton from "./SubmitButton";
+import CenterContainer from "./CenterContainer";
+import { useForm } from "react-hook-form";
+import LoginDto from "../entities/LoginDto";
+import InputErrorMessage from "./InputErrorMessage";
 
 function LoginForm() {
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<LoginDto>();
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
+
   return (
-    <section className="h-[calc(100vh-100px)] flex items-center justify-center">
-      <form className="m-5 border p-5 max-w-md rounded-md drop-shadow">
-        <h1 className="text-4xl font-bold text-center mb-5">Login</h1>
-        <input
-          className="w-full bg-slate-100 p-3 my-3 border rounded-lg"
-          type="email"
-          placeholder="Email"
-        />
+    <CenterContainer>
+      <form
+        onSubmit={onSubmit}
+        className="m-5 border p-5 max-w-md rounded-md drop-shadow"
+      >
+        <Title text="Login" />
 
-        <input
-          className="w-full bg-slate-100 p-3 my-4 border rounded-lg"
-          type="password"
-          placeholder="Password"
-        />
+        <InputField register={register} inputData={InputEmail} />
+        {errors.email && (
+          <InputErrorMessage message="Email is required" />
+        )}
 
-        <div className="flex justify-center mt-3">
-          <button className="p-3 bg-sky-500 text-white rounded-lg hover:text-slate-200 text-lg">
-            Login
-          </button>
-        </div>
+        <InputField register={register} inputData={InputPassword} />
+        {errors.password && (
+          <InputErrorMessage message="Password is required" />
+        )}
+
+        <SubmitButton text="Login" />
 
         <p className="mt-5 text-slate-600">
           Don't have an account?{" "}
@@ -30,7 +46,7 @@ function LoginForm() {
           </Link>
         </p>
       </form>
-    </section>
+    </CenterContainer>
   );
 }
 

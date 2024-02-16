@@ -23,7 +23,7 @@ function NavBar() {
             </li>
             <div className="flex gap-4">
               <li className="hover:text-slate-200">
-                <Link onClick={handleLogout} to="/login">Logout</Link>
+                <Link onClick={handleLogout} to="/">Logout</Link>
               </li>
             </div>
           </>

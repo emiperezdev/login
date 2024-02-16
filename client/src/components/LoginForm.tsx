@@ -7,6 +7,8 @@ import CenterContainer from "./CenterContainer";
 import { useForm } from "react-hook-form";
 import LoginDto from "../entities/LoginDto";
 import InputErrorMessage from "./InputErrorMessage";
+import useLogin from "../hooks/useLogin";
+import useErrorResponse from "../stores/useErrorResponse";
 
 function LoginForm() {
   const {
@@ -15,8 +17,12 @@ function LoginForm() {
     register,
   } = useForm<LoginDto>();
 
+  const login = useLogin();
+  const error = useErrorResponse((s) => s.error);
+
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    login.mutate(data);
   });
 
   return (
@@ -27,10 +33,12 @@ function LoginForm() {
       >
         <Title text="Login" />
 
-        <InputField register={register} inputData={InputEmail} />
-        {errors.email && (
-          <InputErrorMessage message="Email is required" />
+        {error && (
+          <p className="text-white bg-red-600 p-3 rounded-md">{error}</p>
         )}
+
+        <InputField register={register} inputData={InputEmail} />
+        {errors.email && <InputErrorMessage message="Email is required" />}
 
         <InputField register={register} inputData={InputPassword} />
         {errors.password && (

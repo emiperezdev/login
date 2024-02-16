@@ -21,7 +21,7 @@ const useLogin = () => {
     onSuccess: (userData) => {
       navigate('/profile')
       setAuth(true);
-      setUser(userData);
+      setUser(userData as UserDto);
     },
 
     onError: (err) => {

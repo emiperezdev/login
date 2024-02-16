@@ -22,7 +22,6 @@ function LoginForm() {
   const error = useErrorResponse((s) => s.error);
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     login.mutate(data);
   });
 

@@ -19,18 +19,18 @@ function NavBar() {
         {isAuth ? (
           <>
             <li className="hover:text-slate-200">
-              <Link to="/">Home</Link>
+              <Link to="login">Home</Link>
             </li>
             <div className="flex gap-4">
               <li className="hover:text-slate-200">
-                <Link onClick={handleLogout} to="/">Logout</Link>
+                <Link onClick={handleLogout} to="/login">Logout</Link>
               </li>
             </div>
           </>
         ) : (
           <>
             <li className="hover:text-slate-200">
-              <Link to="/">Home</Link>
+              <Link to="login">Home</Link>
             </li>
             <div className="flex gap-4">
               <li className="hover:text-slate-200">

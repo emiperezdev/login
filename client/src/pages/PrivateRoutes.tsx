@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../stores/useAuth";
 
 function PrivatePages() {
@@ -6,7 +6,7 @@ function PrivatePages() {
 
   if (!isAuth) return <Navigate to="/login" />;
 
-  return <div></div>;
+  return <Outlet />;
 }
 
 export default PrivatePages;

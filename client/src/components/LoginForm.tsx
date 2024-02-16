@@ -9,6 +9,7 @@ import LoginDto from "../entities/LoginDto";
 import InputErrorMessage from "./InputErrorMessage";
 import useLogin from "../hooks/useLogin";
 import useErrorResponse from "../stores/useErrorResponse";
+import ErrorResponse from "./ErrorResponse";
 
 function LoginForm() {
   const {
@@ -34,7 +35,7 @@ function LoginForm() {
         <Title text="Login" />
 
         {error && (
-          <p className="text-white bg-red-600 p-3 rounded-md">{error}</p>
+          <ErrorResponse message={error} />
         )}
 
         <InputField register={register} inputData={InputEmail} />

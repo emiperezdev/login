@@ -4,7 +4,9 @@ import useAuth from "../stores/useAuth";
 function PrivatePages() {
   const isAuth = useAuth((s) => s.isAuth);
 
-  if (!isAuth) return <Navigate to="/login" />;
+  setTimeout(() => {
+    if (!isAuth) return <Navigate to="/login" />;
+  }, 1000);
 
   return <Outlet />;
 }

@@ -19,7 +19,7 @@ function NavBar() {
         {isAuth ? (
           <>
             <li className="hover:text-slate-200">
-              <Link to="login">Home</Link>
+              <Link to="/profile">Home</Link>
             </li>
             <div className="flex gap-4">
               <li className="hover:text-slate-200">

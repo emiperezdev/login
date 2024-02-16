@@ -1,9 +1,8 @@
-import { NextFunction, Response } from "express";
-import CustomRequest from "../schemas/IRequest.schema";
+import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { SECRET } from "../start/config";
 
-const auth = (req: CustomRequest, res: Response, next: NextFunction) => {
+const auth = (req: Request, res: Response, next: NextFunction) => {
   const { token } = req.cookies;
   if (!token) return res.status(401).json("Access denied. Token no provided");
 

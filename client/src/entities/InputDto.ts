@@ -17,3 +17,14 @@ export const InputPassword: InputDto = {
   name: 'password'
 };
 
+export const InputAge: InputDto = {
+  type: "number",
+  placeholder: "Age",
+  name: 'age'
+};
+
+export const InputName: InputDto = {
+  type: "text",
+  placeholder: "Name",
+  name: 'name'
+};

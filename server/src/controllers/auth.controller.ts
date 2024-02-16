@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { UserData } from "../schemas/user.schema";
 import getAccessToken from "../libs/getAccessToken";
-import CustomRequest from "../schemas/IRequest.schema";
 
 const db = new PrismaClient();
 
@@ -39,6 +38,6 @@ export const handleLogout = async (req: Request, res: Response) => {
   res.sendStatus(200);
 };
 
-export const handleVerify = (req: CustomRequest, res: Response) => {
+export const handleVerify = (req: Request, res: Response) => {
   res.json(req.user);
 }

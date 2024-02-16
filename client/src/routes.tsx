@@ -1,10 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
+import Layout from "./pages/Layout";
+import LoginPage from "./pages/LoginPage";
 
 const routes = createBrowserRouter([
-  { path: '/', element: <HomePage />},
-  { path: 'profile', element: <ProfilePage />}
+  { path: '/', element: <Layout />, children: [
+    { path: 'login', element: <LoginPage />},
+    { path: 'profile', element: <ProfilePage />}
+  ]},
 ]);
 
 export default routes;
